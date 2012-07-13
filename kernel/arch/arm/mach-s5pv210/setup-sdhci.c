@@ -54,6 +54,7 @@ void s5pv210_setup_sdhci_cfg_card(struct platform_device *dev,
 	u32 ctrl2;
 	u32 ctrl3;
 
+	printk(KERN_DEBUG "s5pv210_setup_sdhci_cfg_card, mmc_ch: %d, clk: %d, card_type: %d\n", dev->id, ios->clock, card->type);
 	ctrl2 = readl(r + S3C_SDHCI_CONTROL2);
 	ctrl2 &= S3C_SDHCI_CTRL2_SELBASECLK_MASK;
 	ctrl2 |= (S3C64XX_SDHCI_CTRL2_ENSTAASYNCCLR |
@@ -74,24 +75,18 @@ void s5pv210_setup_sdhci_cfg_card(struct platform_device *dev,
 
 		if (card->type == MMC_TYPE_MMC)  /* MMC */
 			range_start = 20 * 1000 * 1000;
-		//else    /* SD, SDIO */
-		//	range_start = 25 * 1000 * 1000;
+		else    /* SD, SDIO */
+			range_start = 25 * 1000 * 1000;
 
 		range_end = 37 * 1000 * 1000;
 
-		if ((ios->clock > range_start) && (ios->clock < range_end))
+		if ((ios->clock > range_start) && (ios->clock < range_end)) {
 			ctrl3 = S3C_SDHCI_CTRL3_FCSELTX_BASIC |
 				S3C_SDHCI_CTRL3_FCSELRX_BASIC;
-		else if (machine_is_herring() && herring_is_cdma_wimax_dev() &&
-								dev->id == 2) {
-			ctrl3 = S3C_SDHCI_CTRL3_FCSELTX_BASIC;
-			//if(card->type & MMC_TYPE_SDIO)
-				ctrl3 |= S3C_SDHCI_CTRL3_FCSELRX_BASIC;
-			//else
-			//	ctrl3 |= S3C_SDHCI_CTRL3_FCSELRX_INVERT;
-		} else
+		} else {
 			ctrl3 = S3C_SDHCI_CTRL3_FCSELTX_BASIC |
 				S3C_SDHCI_CTRL3_FCSELRX_INVERT;
+		}
 	}
 
 
@@ -103,6 +98,7 @@ void s5pv210_adjust_sdhci_cfg_card(struct s3c_sdhci_platdata *pdata,
 				   void __iomem *r, int rw)
 {
 	u32 ctrl2, ctrl3;
+	printk(KERN_DEBUG "s5pv210_adjust_sdhci_cfg_card, rw: %d\n", rw);
 
 	ctrl2 = readl(r + S3C_SDHCI_CONTROL2);
 	ctrl3 = readl(r + S3C_SDHCI_CONTROL3);

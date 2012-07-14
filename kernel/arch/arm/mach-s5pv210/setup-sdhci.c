@@ -54,7 +54,7 @@ void s5pv210_setup_sdhci_cfg_card(struct platform_device *dev,
 	u32 ctrl2;
 	u32 ctrl3;
 
-	printk(KERN_DEBUG "s5pv210_setup_sdhci_cfg_card, mmc_ch: %d, clk: %d, card_type: %d\n", dev->id, ios->clock, card->type);
+	//printk(KERN_DEBUG "s5pv210_setup_sdhci_cfg_card, mmc_ch: %d, clk: %d, card_type: %d\n", dev->id, ios->clock, card->type);
 	ctrl2 = readl(r + S3C_SDHCI_CONTROL2);
 	ctrl2 &= S3C_SDHCI_CTRL2_SELBASECLK_MASK;
 	ctrl2 |= (S3C64XX_SDHCI_CTRL2_ENSTAASYNCCLR |

@@ -54,7 +54,7 @@ void s5pv210_setup_sdhci_cfg_card(struct platform_device *dev,
 	u32 ctrl2;
 	u32 ctrl3;
 
-	//printk(KERN_DEBUG "s5pv210_setup_sdhci_cfg_card, mmc_ch: %d, clk: %d, card_type: %d\n", dev->id, ios->clock, card->type);
+	printk(KERN_DEBUG "s5pv210_setup_sdhci_cfg_card, mmc_ch: %d, clk: %d\n", dev->id, ios->clock);
 	ctrl2 = readl(r + S3C_SDHCI_CONTROL2);
 	ctrl2 &= S3C_SDHCI_CTRL2_SELBASECLK_MASK;
 	ctrl2 |= (S3C64XX_SDHCI_CTRL2_ENSTAASYNCCLR |
@@ -73,7 +73,16 @@ void s5pv210_setup_sdhci_cfg_card(struct platform_device *dev,
 		ctrl2 |= S3C_SDHCI_CTRL2_ENFBCLKTX |
 			 S3C_SDHCI_CTRL2_ENFBCLKRX;
 
-		if (card->type == MMC_TYPE_MMC)  /* MMC */
+		if(!dev)
+			printk(KERN_ERR "s5pv210_setup_sdhci_cfg_card NULL dev!\n");
+		if(!ios)
+			printk(KERN_ERR "s5pv210_setup_sdhci_cfg_card NULL ios!\n");
+		if(!card)
+			printk(KERN_ERR "s5pv210_setup_sdhci_cfg_card NULL card!\n");
+		else
+			printk(KERN_DEBUG "s5pv210_setup_sdhci_cfg_card card_type: %d\n", card->type);
+
+		if (dev->id == 0/*card->type == MMC_TYPE_MMC*/)  /* MMC */
 			range_start = 20 * 1000 * 1000;
 		else    /* SD, SDIO */
 			range_start = 25 * 1000 * 1000;

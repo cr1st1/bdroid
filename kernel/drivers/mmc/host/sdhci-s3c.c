@@ -12,6 +12,8 @@
  * published by the Free Software Foundation.
  */
 
+#define DEBUG
+
 #include <linux/delay.h>
 #include <linux/dma-mapping.h>
 #include <linux/platform_device.h>
@@ -29,7 +31,6 @@
 #include "sdhci.h"
 
 #define MAX_BUS_CLK	(4)
-#define DEBUG
 
 /**
  * struct sdhci_s3c - S3C SDHCI instance

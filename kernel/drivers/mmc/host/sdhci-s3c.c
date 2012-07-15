@@ -29,6 +29,7 @@
 #include "sdhci.h"
 
 #define MAX_BUS_CLK	(4)
+#define DEBUG
 
 /**
  * struct sdhci_s3c - S3C SDHCI instance

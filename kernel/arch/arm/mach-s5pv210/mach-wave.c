@@ -3295,7 +3295,7 @@ static void __init wave_fixup(struct machine_desc *desc,
 		struct tag *tags, char **cmdline,
 		struct meminfo *mi)
 {
-	mi->bank[0].start = 0x30000000;
+	mi->bank[0].start = S5PV210_PA_SDRAM;
 	mi->bank[0].size = 80 * SZ_1M;
 	mi->bank[0].node = 0;
 
@@ -3305,10 +3305,10 @@ static void __init wave_fixup(struct machine_desc *desc,
 
 	mi->nr_banks = 2;
 
-	ram_console_start = mi->bank[1].start + mi->bank[1].size;
-	ram_console_size = SZ_1M - SZ_4K;
+//	ram_console_start = mi->bank[1].start + mi->bank[1].size;
+//	ram_console_size = SZ_1M - SZ_4K;
 
-	pm_debug_scratchpad = ram_console_start + ram_console_size;
+//	pm_debug_scratchpad = ram_console_start + ram_console_size;
 
 }
 

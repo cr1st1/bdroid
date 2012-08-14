@@ -56,6 +56,10 @@ chmod 0777 /andropart
 	mount ext2 loop@/andropart/cache.img /cache noatime
 
     export EXTERNAL_STORAGE /mnt/sdcard
+    export SECONDARY_STORAGE /mnt/emmc
+
+    mkdir /mnt/emmc 0000 system system
+    symlink /mnt/emmc /emmc
     mkdir /mnt/sdcard 0000 system system
     symlink /mnt/sdcard /sdcard
 

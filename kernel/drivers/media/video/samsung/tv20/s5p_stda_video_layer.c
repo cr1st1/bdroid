@@ -610,9 +610,10 @@ bool _s5p_vlayer_set_dest_size(unsigned long buf_in)
 	u32 d_h = 0;
 	bool ipc = false;
 
-	struct s5p_img_size *size = (struct s5p_img_size *)buf_in;
+	struct s5p_img_size *size;
 	enum s5p_tv_vp_err verr;
 
+	size = (struct s5p_img_size *)buf_in;
 	s5ptv_status.vl_basic_param.dest_width = size->img_width;
 	s5ptv_status.vl_basic_param.dest_height = size->img_height;
 	_s5p_vlayer_calc_inner_values();

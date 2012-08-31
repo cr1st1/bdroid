@@ -51,9 +51,9 @@ chmod 0777 /andropart
 	mkdir /andropart
 	chmod 0777 /andropart
 	mount vfat /dev/block/platform/s3c-sdhci.0/by-num/p2 /andropart noatime
-	mount ext2 loop@/andropart/system.img /system ro noatime
-	mount ext2 loop@/andropart/data.img /data noatime
-	mount ext2 loop@/andropart/cache.img /cache noatime
+	mount ext4 loop@/andropart/system.img /system ro noatime
+	mount ext4 loop@/andropart/data.img /data noatime
+	mount ext4 loop@/andropart/cache.img /cache noatime
 
     export EXTERNAL_STORAGE /mnt/sdcard
     export SECONDARY_STORAGE /mnt/emmc
